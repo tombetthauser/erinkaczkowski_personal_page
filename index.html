@@ -1,302 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tombetthauser</title>
-  <script>
-    const sonicMode = true;
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom's Social Media Feed</title>
+    <style>
+        body {
+          width: 90%;
+          max-width: 500px;
+          margin: 50px auto;
+        }
+        h1 {
+            font-size: 60px;
+            font-weight: 100;
+            margin-bottom: 70px;
+        }
+        img {
+          width: 100%;
+          image-orientation: from-image;
+        }
+    </style>
 </head>
-<style>
-  html {
-    background-color: greenyellow;
-    animation: drift 30s linear infinite;
-    animation: zoom 20s linear infinite;
-    background-size: 500px 380px;
-    background-image: url("./images/img1.jpg");
-    background-attachment: fixed;
-    background-image: url("https://i.makeagif.com/media/9-20-2017/fZPKhZ.gif");
-    /* background-image: url("https://thumbs.gfycat.com/EthicalJoyfulBangeltiger-max-1mb.gif"); */
-    /* filter: invert(1) contrast(20) sepia(20) hue-rotate(45deg) saturate(10) ; */
-    /* https://i.makeagif.com/media/9-20-2017/fZPKhZ.gif */
-  }
-  body {
-    padding: 0 25px 100px;
-    max-width: 700px;
-  }
-  h1 {
-    color: white;
-    text-shadow: 10px 10px 0 rgba(255, 255, 255, .7),
-    20px 20px 0 rgba(255, 255, 255, .5),
-    30px 30px 0 rgba(255, 255, 255, .3);
-    overflow-wrap: break-word;
-    font-weight: 100;
-    font-size: 100px;
-    width: 100%;
-    line-height: 80px;
-    margin-bottom: 75px;
-    margin-top: 30px;
-  }
-  @keyframes drift {
-    from { background-position: 0px 0px; }
-    to { background-position: -500px -380px; }
-  }
-  @keyframes zoom {
-    from {     background-size: 500px 380px; }
-    to {  background-size: 0px 0px; }
-  }
-  @keyframes jitter {
-    0% { margin: 1px 1px -1px 1px; }
-    10% { margin: -1px -1px 1px -1px; }
-    20% { margin: 1px 1px -1px 1px; }
-    30% { margin: -1px 1px -1px -1px; }
-    40% { margin: 1px -1px 1px -1px; }
-    50% { margin: 1px 1px -1px 1px; }
-    60% { margin: -1px -1px 1px -1px; }
-    70% { margin: 1px 1px -1px 1px; }
-    80% { margin: -1px 1px -1px -1px; }
-    90% { margin: 1px -1px 1px -1px; }
-    100% { margin: 1px -1px 1px -1px; }
-  }
-  a {
-    font-size: 20px;
-    background-color: yellow;
-    display: inline-block;
-    width: fit-content;
-    margin-top: 5px;
-  }
-
-  ul {
-    padding-left: 0;
-    list-style-type: none;
-    margin-top: 50px;
-  }
-  .feed-image {
-    border: 3px solid red;
-    max-width: 100%;
-    margin-bottom: 0;
-  }
-  .feed-text {
-    background-color: red;
-    color: white;
-    margin-top: -5px;
-    width: fit-content;
-    padding-top: 7px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 2px;
-  }
-  .red-label {
-    margin-top: 125px;
-    margin-bottom: 50px;
-    background-color: red;
-    color: white;
-    font-weight: 300;
-    font-size: 40px;
-    width: fit-content;
-  }
-  img {
-    max-width: 100%;
-    image-orientation: from-image;
-  }
-  #sonic-player {
-    filter: saturate(0) ;
-    /* filter: invert(0) brightness(.6) contrast(20) sepia(20) hue-rotate(90deg) saturate(0) ; */
-    /* border: '3px outset white'; */
-    box-shadow: -5px 5px 0 gray,
-    5px -5px 0 lightgray,
-    5px 5px 0 gray,
-    -5px -5px 0 gray,
-    -10px 10px 5px black;
-  }
-  #sonic-player:hover {
-    animation: jitter .5s linear infinite;
-    transition: 0;
-  }
-  /* img:hover {
-    filter: invert(1);
-    cursor: grab;
-  } */
-</style>
-
 <body>
-  <h1>https://tombetthauser.com</h1>
+    <a href="./index.html">http://tombetthauser.com</a>
+    <h1>Tom's Social Media Feed</h1>
+    <!-- <h1>Tom's Social<br/>Media Feed</h1> -->
+    <div id="image-container"></div>
+    <br><br><br>
+    <!-- <a href="./index.html">http://tombetthauser.com</a> -->
+    <!-- <br><br> -->
+    <a href="#">back...</a>
+    <!-- [END] -->
 
-  <div id="sonic-player"></div>
+    <script>
+        const imgUrls = [
+            // start tag
+			 { filename: "IMG_6398.png", date: "[Sep '24]" },
+			      // end tag
+        ];
 
-  <ul>
-    <li><a href="https://github.com/tombetthauser">💻 github</a></li>
-    <li><a href="https://www.linkedin.com/in/tombetthauser/">🤝 linkedin</a></li>
-    <li><a href="./feed.html">🖤 social media</a></li>
-    <li><a href="./oldsite/resume.pdf">📄 resume</a></li>
-    <!-- <li><a href="https://socialnotwork.net/@tom">studio-work</a></li> -->
-    <!-- <li><a href="https://socialnotwork.net/@tom">mastodon</a></li> -->
-    <!-- <li><a href="https://www.etsy.com/shop/SocietyofObjects">🛒 art</a></li> -->
-  </ul>
+        let imgIndex = 0;
+        const imagesPerBatch = 10;
+        const container = document.getElementById('image-container');
 
-  <!-- <ul>
-    <li><a href="weblog/index.html">✏️ weblog</a></li>
-  </ul> -->
-
-  <ul>
-    <li><a id='page-garden' href="https://pagegarden.herokuapp.com/">🌱 page-garden</a></li>
-    <li><a id='zine-bot' href="https://tombetthauser.github.io/wasm-zinebot/">📒 zine-bot</a></li>
-    <!-- <li><a id='astronaut-horse' href="https://www.astronaut.horse/">🐎 astronaut-horse</a></li> -->
-    <!-- <li><a id='state-of-the-arts' href="https://xstreetgames.itch.io/">🕹️ gameboy-games</a></li> -->
-    <!-- <li><a id='state-of-the-arts' href="https://tombetthauser.github.io/stateofthearts/">📄 state-of-the-arts-survey</a></li> -->
-    <!-- <li><a id='astronaut-horse' href="./coming-soon.html">🎨 art-n-chill</a></li> -->
-    <!-- <li><a id='astronaut-horse' href="./coming-soon.html">🏛 artist-coding-workshops</a></li> -->
-    <!-- <li><a id='astronaut-horse' href="https://www.astronaut.horse/">🤖 blog-conversations-with-artists-and-engineers</a></li> -->
-    <!-- <li><a id='computer-buddies' href="https://tombetthauser.github.io/computerbuddies/">💾 computer-buddy-sculptures</a></li> -->
-    <!-- <li><a id='computer-buddies' href="https://tombetthauser.github.io/computerbuddies/">✏️ tech-people-portraits</a></li> -->
-    <!-- <li><a href="www.zine.garden/">zine-garden</a></li> -->
-  </ul>
-  
-  <ul>
-    <li><a href="oldsite/studio/index.html">🖼️ studio-archive</a></li>
-    <li><a href="https://tombetthauser.bandcamp.com">🎹 bandcamp</a></li>
-  </ul>
-
-  <a class="red-label" href="./feed.html">
-    image feed
-  </a>
-
-  <div id="image-container"></div>
-  <p class="red-label">[END]</p>
-  <a href="#">/backup</a>
-
-  <script>
-    const images = [
-      "./oldsite/images/img1.jpg",
-      "./oldsite/images/image-02-thumb.png",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/77.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/62.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/57.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/56.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/51.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/49.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/48.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/44.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/41.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/38.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/37.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/34.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/33.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/32.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/30.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/28.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/27.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/26.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/23.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/20.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/19.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/18.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/17.jpg",
-      "./oldsite/old-studio/assets/images/portfolio/thumb/16.jpg",
-    ];
-
-    
-    const html = document.querySelector("html");
-    
-    if (sonicMode) {
-      // html.style.backgroundImage = `url("${newImg}")`;
-    } else {
-      const randImg = () => {
-        return images[Math.floor(Math.random() * images.length)];
-      }
-
-      let newImg = randImg();
-      html.style.backgroundImage = `url("${newImg}")`;
-  
-      setInterval(() => {
-        newImg = randImg();
-        html.style.backgroundImage = `url("${newImg}")`;
-      }, 6000)
-    }
-  </script>
-
-  <script>
-      const imgUrls = [
-        // start tag
-			 { filename: "IMG_6384.jpeg", date: "[Sep '24]" },
-			 { filename: "IMG_6371.jpeg", date: "[Sep '24]" },
-			 { filename: "3_image.jpg", date: "[Sep '24]" },
-			 { filename: "1_IMG_3966.jpeg", date: "[Sep '24]" },
-			 { filename: "1_image.jpg", date: "[Sep '24]" },
-        // end tag
-      ];
-
-      let imgIndex = 0;
-      const imagesPerBatch = 10;
-      const container = document.getElementById('image-container');
-
-      // Function to load the next batch of images
-      function loadImages() {
+        // Function to load the next batch of images
+        function loadImages() {
         const endIndex = imgIndex + imagesPerBatch;
         for (let i = imgIndex; i < endIndex && i < imgUrls.length; i++) {
             const atag1 = document.createElement('a');
             atag1.href = `./images/${imgUrls[i].filename}`;
 
             const img = document.createElement('img');
-            img.src = `./thumbnails/${imgUrls[i].filename}`;
+            img.src = `thumbnails/${imgUrls[i].filename}`;
             atag1.appendChild(img);
 
             container.appendChild(atag1);
 
-            const atag2 = document.createElement('a');
+            // const atag2 = document.createElement('a');
 
             const ptag = document.createElement('p');
-            ptag.className = `feed-text`;
-            ptag.innerHTML = `./${imgUrls[i].filename} ${imgUrls[i].date}`;
-            atag2.appendChild(ptag);
+            // ptag.className = `feed-text`;
+            // ptag.innerHTML = `${imgUrls[i].filename} ${imgUrls[i].date}`;
+            ptag.innerHTML = `${imgUrls[i].date}`;
+            // atag2.appendChild(ptag);
 
-            container.appendChild(atag2);
+            container.appendChild(ptag);
+
+            const brtag = document.createElement('br');
+            container.appendChild(brtag);
         }
         imgIndex += imagesPerBatch;
-      }
-
-      // Infinite scroll handler
-      window.addEventListener('scroll', () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-          loadImages();
-      }
-      });
-
-      // Initial load
-      loadImages();
-  </script>
-
-  <!-- adds sonic music player -->
-  <script>
-    // Define the sonicMode variable
-    // const sonicMode = true; // Change this to false to test when it's not true
-
-    // Function to create and insert the YouTube player
-    function loadYouTubePlayer() {
-        if (sonicMode) {
-            // Load the IFrame API
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            // Create the YouTube player when the API is ready
-            window.onYouTubeIframeAPIReady = function() {
-                new YT.Player('sonic-player', {
-                    height: '25',
-                    width: '250',
-                    videoId: 'dgJWZiBt6_w', // Example video ID
-                    playerVars: { 'autoplay': 1, 'controls': 0 } // Minimal controls
-                });
-            };
         }
-    }
 
-    // Call the function to initialize the player
-    loadYouTubePlayer();
-  </script>
+        // Infinite scroll handler
+        window.addEventListener('scroll', () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            loadImages();
+        }
+        });
 
+        // Initial load
+        loadImages();
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<body>
+
+    <h1>Tom Betthauser</h1>
+
+    <a href="#">/images</a>
+    <a href="#">/resume</a>
+    <a href="#">/contact</a>
+
+  <div id="image-container"></div>
+  <div id="loading">Loading more images...</div>
+
+  <script>
+    // Array of image URLs
+    const imgUrls = [
+    ];
+
+    let imgIndex = 0;
+    const imagesPerBatch = 10;
+    const container = document.getElementById('image-container');
+    // const loading = document.getElementById('loading');
+
+    // Function to load the next batch of images
+    function loadImages() {
+      const endIndex = imgIndex + imagesPerBatch;
+      for (let i = imgIndex; i < endIndex && i < imgUrls.length; i++) {
+        const img = document.createElement('img');
+        img.src = imgUrls[i];
+        container.appendChild(img);
+      }
+      imgIndex += imagesPerBatch;
+
+      // If all images are loaded, hide the loading message
+    //   if (imgIndex >= imgUrls.length) {
+    //     loading.style.display = 'none';
+    //   }
+    }
+
+    // Infinite scroll handler
+    window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        loadImages();
+      }
+    });
+
+    // Initial load
+    loadImages();
+  </script>
+
+</body> -->

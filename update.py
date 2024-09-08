@@ -162,7 +162,7 @@ clean_record()
 
 
 
-def update_feed_from_record(record_file='record.txt', feed_file='feed.html'):
+def update_feed_from_record(record_file='record.txt', feed_file='index.html'):
     # Check if record.txt exists
     if not os.path.exists(record_file):
         print(f"{record_file} does not exist.")
@@ -229,7 +229,6 @@ def update_feed_from_record(record_file='record.txt', feed_file='feed.html'):
     print(f"Feed file {feed_file} updated successfully.")
 
 # Example of using the function
-update_feed_from_record(feed_file='feed.html')
 update_feed_from_record(feed_file='index.html')
 
 
