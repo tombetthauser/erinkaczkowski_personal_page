@@ -1,0 +1,25 @@
+Replace image files with whatever text you want in the text.txt file. You can add links and also leave lines blank if you want no text. When you add a new image it will default to just show the file name so yo ucan find it easily in the test.txt file. The whole project will rebuild / update after you change anything in the text.txt file. You can still delete images or move them around by changing the record.txt file but you'll have to manually update the text.txt file after or text will probably be displaying in the wrong order. Check out the examples below.
+http://google.com
+
+IMG_9618.jpeg
+IMG_4838.jpeg
+IMG_4832.jpeg
+IMG_4804.jpeg
+IMG_4826.jpeg
+IMG_4830.jpeg
+IMG_4796.jpeg
+IMG_4749.jpeg
+IMG_5418.jpeg
+IMG_5404.jpeg
+IMG_4755.jpeg
+IMG_4822.jpeg
+IMG_4758.jpeg
+IMG_4740.jpeg
+IMG_4794.jpeg
+IMG_4743.jpeg
+IMG_4767.jpeg
+IMG_4846.jpeg
+IMG_4760.jpeg
+IMG_4824.jpeg
+IMG_9168.jpeg
+image.jpg

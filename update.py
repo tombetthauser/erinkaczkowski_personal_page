@@ -19,6 +19,15 @@ def get_image_creation_date(file_path: str) -> str:
 # print(formatted_date)
 
 
+def formatted_current_date():
+    # Get the current date and time
+    now = datetime.now()
+    
+    # Format the date as desired: [month-day-year]
+    formatted_date = f"[{now.month}-{now.day}-{now.year}]"
+    
+    return formatted_date
+
 
 
 def remove_dummy_file():
@@ -41,9 +50,10 @@ remove_dummy_file()
 
 
 
+
 import os
 
-def process_images(inbox_dir='inbox', images_dir='images', record_file='record.txt'):
+def process_images(inbox_dir='inbox', images_dir='images', record_file='record.txt', text_file='text.txt'):
     # List of acceptable image file extensions
     image_extensions = ['.png', '.jpg', '.jpeg', '.gif']
 
@@ -113,6 +123,10 @@ def process_images(inbox_dir='inbox', images_dir='images', record_file='record.t
                 record.write(new_filename)  # Write new filename first
                 record.writelines(existing_content)  # Write the rest of the old content
 
+            with open(text_file, 'w') as record:
+                record.write(new_filename)  # Write new filename first
+                record.writelines(existing_content)  # Write the rest of the old content
+
             # Remove the file from the inbox after copying
             os.remove(source)
             print(f"Removed {filename} from {inbox_dir}")
@@ -157,18 +171,46 @@ clean_record()
 
 
 
+def update_text_file(record_file='record.txt', text_file='text.txt'):
+    # Read the lines from the record.txt file
+    with open(record_file, 'r') as record_f:
+        record_lines = record_f.readlines()
+    
+    # Read the lines from the text.txt file
+    with open(text_file, 'r') as text_f:
+        text_lines = text_f.readlines()
+
+    # Get the number of lines in both files
+    record_len = len(record_lines)
+    text_len = len(text_lines)
+
+    # If record.txt has more lines, copy the corresponding lines from record.txt to text.txt
+    if record_len > text_len:
+        for i in range(text_len, record_len):
+            text_lines.append(record_lines[i])
+    # If text.txt has more lines, truncate the excess lines
+    elif record_len < text_len:
+        text_lines = text_lines[:record_len]
+
+    # Write the updated lines back to text.txt
+    with open(text_file, 'w') as text_f:
+        text_f.writelines(text_lines)
+
+# Example usage:
+# update_text_file('record.txt', 'text.txt')
+
+update_text_file()
 
 
 
 
-
-def update_feed_from_record(record_file='record.txt', feed_file='index.html'):
+def update_feed_from_record(record_file='record.txt', feed_file='index.html', text_file='text.txt'):
     # Check if record.txt exists
     if not os.path.exists(record_file):
         print(f"{record_file} does not exist.")
         return
 
-    # Check if feed.html (or target file) exists
+    # Check if index.html (or target file) exists
     if not os.path.exists(feed_file):
         print(f"{feed_file} does not exist.")
         return
@@ -177,20 +219,27 @@ def update_feed_from_record(record_file='record.txt', feed_file='index.html'):
     with open(record_file, 'r') as record:
         record_lines = record.readlines()
 
+    # Read the lines from text.txt
+    with open(text_file, 'r') as text:
+        text_lines = text.readlines()
+
     # Wrap each line in quotes and add a comma at the end
     # wrapped_lines = [f'\t\t\t"{line.strip()}",\n' for line in record_lines]
     wrapped_lines = []
 
-    for line in record_lines:
+    for idx, line in enumerate(record_lines):
         print(line)
-        img_date = get_image_creation_date(f"./images/{line.strip()}")
+        # img_date = get_image_creation_date(f"./images/{line.strip()}")
+        img_date = formatted_current_date()
         print(img_date)
 
         filename = line.strip()
 
+        img_text = text_lines[idx].strip().replace('"', "'")
+
         # new_line_str = f"\t\t\t{{ filename: `{line.strip()}`, date: `{img_date}` \},\n"
         # formatted_string = f"Here is a string with quotes: \"{value}\" and curly brackets: {{this is a literal curly bracket}}"
-        new_line_str = f"\t\t\t {{ filename: \"{filename}\", date: \"{img_date}\" }},\n"
+        new_line_str = f"\t\t\t {{ filename: \"{filename}\", date: \"{img_date}\", text: \"{img_text}\"}},\n"
 
         # new_line_str = '\t\t\t{ filename: \'%\', date: \'%\' },\n' % (line.strip(), img_date)
         wrapped_lines.append(new_line_str)
@@ -229,6 +278,7 @@ def update_feed_from_record(record_file='record.txt', feed_file='index.html'):
     print(f"Feed file {feed_file} updated successfully.")
 
 # Example of using the function
+# update_feed_from_record(feed_file='index.html')
 update_feed_from_record(feed_file='index.html')
 
 
@@ -311,3 +361,55 @@ def create_inbox_with_dummy_file():
 
 # Call the function
 create_inbox_with_dummy_file()
+
+
+
+def get_first_line(input_file):
+    with open(input_file, 'r') as file:
+        first_line = file.readline().strip()  # Read the first line and strip any surrounding whitespace
+    return first_line
+
+
+
+def replace_text_between_markers(start_string, end_string, file_to_update, new_text):
+    # Read the file content
+    with open(file_to_update, 'r') as file:
+        lines = file.readlines()
+
+    # Initialize variables
+    new_content = []
+    in_marker_block = False
+    
+    # Process the file line by line
+    for line in lines:
+        if start_string in line:
+            # When the start marker is found, add the line and start replacing text
+            new_content.append(line)
+            new_content.append(new_text + '\n')  # Append the new text
+            in_marker_block = True
+        elif end_string in line and in_marker_block:
+            # When the end marker is found, stop replacing text
+            new_content.append(line)
+            in_marker_block = False
+        elif not in_marker_block:
+            # Outside the marker block, just copy the line
+            new_content.append(line)
+
+    # Write the modified content back to the file
+    with open(file_to_update, 'w') as file:
+        file.writelines(new_content)
+
+new_preview_header = f'''\
+  <meta property="og:title" content=" ̴̛̬̱͈̃̅͠ ̴̣͙̱͕̥͒́̓t̵̢̺͉͔͛́͗͛̈́ơ̷̗͎m̴͚͍̞͙͑̔b̵̢͇͚̱͚̀͠ȩ̶̡̡͉̭́̾̚͝t̴̼͕̯̭̜͂̐̀̿t̶̛͉̭͍͒̔̽̍ͅh̷̦̟̖̟̀̔a̷̡̺̹̾̇̋̀͆ú̴̜̔͝s̸͈̦͍͓͂e̶͎͎̖̖̔ŕ̸̢͝ ̶̢̛͕͕̇ ̸̧̦̥̇̂͘" />
+  <meta property="og:image" content="./thumbnails/{get_first_line('record.txt')}" />\
+'''
+
+replace_text_between_markers('<!-- START_PREVIEW_HEADER -->', '<!-- END_PREVIEW_HEADER -->', 'index.html', new_preview_header)
+
+
+new_preview_header = f'''\
+    <meta property="og:title" content="Tom's Social Media Feed" />
+    <meta property="og:image" content="./thumbnails/{get_first_line('record.txt')}" />\
+'''
+
+replace_text_between_markers('<!-- START_PREVIEW_HEADER -->', '<!-- END_PREVIEW_HEADER -->', 'index.html', new_preview_header)

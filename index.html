@@ -10,8 +10,7 @@
           max-width: 500px;
           margin: 50px auto;
         }
-        h2 {
-            font-size: 60px;
+        .title {
             font-weight: 100;
             margin-bottom: 70px;
         }
@@ -19,11 +18,15 @@
           width: 100%;
           image-orientation: from-image;
         }
+        .feed-text {
+          min-height: 20px;
+          margin-bottom: 50px;
+        }
     </style>
 </head>
 <body>
     <!-- <a href="./index.html">http://tombetthauser.com</a> -->
-    <h1>erin kaczkowski studio work</h1></h1>
+    <h1 class="title">erin kaczkowski studio work</h1>
     <!-- <h1>Tom's Social<br/>Media Feed</h1> -->
     <div id="image-container"></div>
     <br><br><br>
@@ -33,79 +36,135 @@
     <!-- [END] -->
 
     <script>
-        const imgUrls = [
-            // start tag
-			 { filename: "IMG_9616.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_9617.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_9615.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_9618.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4838.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4832.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4804.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4826.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4830.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4796.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4749.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_5418.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_5404.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4755.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4822.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4758.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4740.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4794.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4743.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4767.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4846.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4760.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_4824.jpeg", date: "[Oct '24]" },
-			 { filename: "IMG_9168.jpeg", date: "[Oct '24]" },
-			 { filename: "image.jpg", date: "[Oct '24]" },
-			      // end tag
-        ];
+      const imgUrls = [
+          // start tag
+			 { filename: "IMG_9615.jpeg", date: "[10-7-2024]", text: "Replace image files with whatever text you want in the text.txt file. You can add links and also leave lines blank if you want no text. When you add a new image it will default to just show the file name so yo ucan find it easily in the test.txt file. The whole project will rebuild / update after you change anything in the text.txt file. You can still delete images or move them around by changing the record.txt file but you'll have to manually update the text.txt file after or text will probably be displaying in the wrong order. Check out the examples below."},
+			 { filename: "IMG_9617.jpeg", date: "[10-7-2024]", text: "http://google.com"},
+			 { filename: "IMG_9616.jpeg", date: "[10-7-2024]", text: ""},
+			 { filename: "IMG_9618.jpeg", date: "[10-7-2024]", text: "IMG_9618.jpeg"},
+			 { filename: "IMG_4838.jpeg", date: "[10-7-2024]", text: "IMG_4838.jpeg"},
+			 { filename: "IMG_4832.jpeg", date: "[10-7-2024]", text: "IMG_4832.jpeg"},
+			 { filename: "IMG_4804.jpeg", date: "[10-7-2024]", text: "IMG_4804.jpeg"},
+			 { filename: "IMG_4826.jpeg", date: "[10-7-2024]", text: "IMG_4826.jpeg"},
+			 { filename: "IMG_4830.jpeg", date: "[10-7-2024]", text: "IMG_4830.jpeg"},
+			 { filename: "IMG_4796.jpeg", date: "[10-7-2024]", text: "IMG_4796.jpeg"},
+			 { filename: "IMG_4749.jpeg", date: "[10-7-2024]", text: "IMG_4749.jpeg"},
+			 { filename: "IMG_5418.jpeg", date: "[10-7-2024]", text: "IMG_5418.jpeg"},
+			 { filename: "IMG_5404.jpeg", date: "[10-7-2024]", text: "IMG_5404.jpeg"},
+			 { filename: "IMG_4755.jpeg", date: "[10-7-2024]", text: "IMG_4755.jpeg"},
+			 { filename: "IMG_4822.jpeg", date: "[10-7-2024]", text: "IMG_4822.jpeg"},
+			 { filename: "IMG_4758.jpeg", date: "[10-7-2024]", text: "IMG_4758.jpeg"},
+			 { filename: "IMG_4740.jpeg", date: "[10-7-2024]", text: "IMG_4740.jpeg"},
+			 { filename: "IMG_4794.jpeg", date: "[10-7-2024]", text: "IMG_4794.jpeg"},
+			 { filename: "IMG_4743.jpeg", date: "[10-7-2024]", text: "IMG_4743.jpeg"},
+			 { filename: "IMG_4767.jpeg", date: "[10-7-2024]", text: "IMG_4767.jpeg"},
+			 { filename: "IMG_4846.jpeg", date: "[10-7-2024]", text: "IMG_4846.jpeg"},
+			 { filename: "IMG_4760.jpeg", date: "[10-7-2024]", text: "IMG_4760.jpeg"},
+			 { filename: "IMG_4824.jpeg", date: "[10-7-2024]", text: "IMG_4824.jpeg"},
+			 { filename: "IMG_9168.jpeg", date: "[10-7-2024]", text: "IMG_9168.jpeg"},
+			 { filename: "image.jpg", date: "[10-7-2024]", text: "image.jpg"},
+          // end tag
+      ];
 
-        let imgIndex = 0;
-        const imagesPerBatch = 10;
-        const container = document.getElementById('image-container');
+      let imgIndex = 0;
+      const imagesPerBatch = 10;
+      const container = document.getElementById('image-container');
 
-        // Function to load the next batch of images
-        function loadImages() {
-        const endIndex = imgIndex + imagesPerBatch;
-        for (let i = imgIndex; i < endIndex && i < imgUrls.length; i++) {
-            const atag1 = document.createElement('a');
-            atag1.href = `./images/${imgUrls[i].filename}`;
+      // Function to load the next batch of images
+      function loadImages() {
+      const endIndex = imgIndex + imagesPerBatch;
 
-            const img = document.createElement('img');
-            img.src = `thumbnails/${imgUrls[i].filename}`;
-            atag1.appendChild(img);
+      for (let i = imgIndex; i < endIndex && i < imgUrls.length; i++) {
+          const atag1 = document.createElement('a');
+          atag1.href = `./images/${imgUrls[i].filename}`;
+          
+          const img = document.createElement('img');
+          img.src = `./thumbnails/${imgUrls[i].filename}`;
+          atag1.appendChild(img);
+          
+          // container.appendChild(atag1);
+          
+          const atag2 = document.createElement('a');            
+          const containerDiv = document.createElement('div');
+          const currImgText = imgUrls[i].text;
 
-            container.appendChild(atag1);
+          if (currImgText !== '#none') {
+            if (currImgText.slice(0, 4) == '<') {
+              const newHtml = document.createElement('html');
+              newHtml.innerHTML = currImgText;
+              newHtml.className = `feed-text`;
+              atag2.appendChild(newHtml);
+            } else if (currImgText.slice(0,4) == 'http') {
+              const newPTag = document.createElement('p');
+              // newPTag.innerHTML = currImgText;
+              newPTag.className = `feed-text`;
+              
+              const newATag = document.createElement('a');
+              newATag.href = currImgText;
+              newATag.innerHTML = currImgText;
+              newATag.className = `feed-text`;
+              newPTag.appendChild(newATag);
 
-            // const atag2 = document.createElement('a');
-
+              atag2.appendChild(newPTag);
+            } else {
+              const newPTag = document.createElement('p');
+              newPTag.innerHTML = currImgText;
+              newPTag.className = `feed-text`;
+              atag2.appendChild(newPTag);
+            }
+          } else {
             const ptag = document.createElement('p');
-            // ptag.className = `feed-text`;
-            // ptag.innerHTML = `${imgUrls[i].filename} ${imgUrls[i].date}`;
-            ptag.innerHTML = `${imgUrls[i].date}`;
-            // atag2.appendChild(ptag);
+            ptag.className = `feed-text`;
+            // ptag.innerHTML = `./${imgUrls[i].filename} ${imgUrls[i].date}`;
+            ptag.innerHTML = `./${imgUrls[i].filename}`;
+            // ptag.innerHTML = ``;
+            atag2.appendChild(ptag);
+          }
+          
+          containerDiv.appendChild(atag1);
+          containerDiv.appendChild(atag2);
 
-            container.appendChild(ptag);
 
-            const brtag = document.createElement('br');
-            container.appendChild(brtag);
-        }
-        imgIndex += imagesPerBatch;
-        }
+          container.appendChild(containerDiv);
+      }
 
-        // Infinite scroll handler
-        window.addEventListener('scroll', () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-            loadImages();
-        }
-        });
 
-        // Initial load
-        loadImages();
-    </script>
+      // for (let i = imgIndex; i < endIndex && i < imgUrls.length; i++) {
+      //     const atag1 = document.createElement('a');
+      //     atag1.href = `./images/${imgUrls[i].filename}`;
+
+      //     const img = document.createElement('img');
+      //     img.src = `thumbnails/${imgUrls[i].filename}`;
+      //     atag1.appendChild(img);
+
+      //     container.appendChild(atag1);
+
+      //     // const atag2 = document.createElement('a');
+
+      //     const ptag = document.createElement('p');
+      //     // ptag.className = `feed-text`;
+      //     // ptag.innerHTML = `${imgUrls[i].filename} ${imgUrls[i].date}`;
+      //     ptag.innerHTML = `${imgUrls[i].date}`;
+      //     // atag2.appendChild(ptag);
+
+      //     container.appendChild(ptag);
+
+      //     const brtag = document.createElement('br');
+      //     container.appendChild(brtag);
+      // }
+      imgIndex += imagesPerBatch;
+      }
+
+      // Infinite scroll handler
+      window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+          loadImages();
+      }
+      });
+
+      // Initial load
+      loadImages();
+  </script>
 </body>
 </html>
 
